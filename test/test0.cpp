@@ -3,10 +3,10 @@
 #include <stdlib.h>
 
 
-class ThreadTest : public Moos::Thread
+class ThreadTest : public Moos::MoosThread
 {
 public:
-	MOOS_SIGNAL(int, int) m_addSignal;_
+	MOOS_SIGNAL(int, int) m_addSignal;
 
 
 	bool threadRun()
