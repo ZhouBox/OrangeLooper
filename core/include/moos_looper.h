@@ -26,8 +26,8 @@ public:
 
     static MoosLooper* getLooper(const std::thread::id& id_)
     {
-        std::mutex _mutex;
-        std::unique_lock<std::mutex> _lock(_mutex);
+        
+        std::unique_lock<std::mutex> _lock(m_mutex);
         auto _looper = m_loopers.find(id_);
         MoosLooper *_re = NULL;
         if (_looper != m_loopers.end()) {
@@ -124,8 +124,10 @@ private:
 
 
     MoosTaskQueue m_queue;
-    static std::map<std::thread::id, MoosLooper*> m_loopers;
     std::atomic_bool m_isRunning;
+    
+    static std::map<std::thread::id, MoosLooper*> m_loopers;
+    static std::mutex m_mutex;
 
 };
 
