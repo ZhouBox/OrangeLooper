@@ -18,6 +18,7 @@ DEFINE_NAMESPACE_MOOS_BEGIN
 template <typename T>
 class MoosQueue
 {
+    friend class MoosLooper;
 public:
 
     void enqueue(const T& t_)
