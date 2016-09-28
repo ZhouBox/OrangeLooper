@@ -125,16 +125,13 @@ private:
     void waitdelay()
     {
         std::unique_lock<std::mutex> _lock(m_queue.m_mutex);
-        do {
-            auto ite = std::min_element(m_queue.m_queue.begin(), m_queue.m_queue.end(),
+        auto ite = std::min_element(m_queue.m_queue.begin(), m_queue.m_queue.end(),
                                         [](const MoosTaskBase*t1, const MoosTaskBase* t2){ return t1->ttl() < t2->ttl();});
-            if (ite != m_queue.m_queue.end()) {
-                if ((*ite)->ttl() != 0) {
-                    m_queue.m_cv.wait_until(std::chrono::system_clock::now() + std::chrono::milliseconds((*ite)->ttl()));
-                }
-            }
+        if (ite != m_queue.m_queue.end() && (*ite)->ttl()) {
+            m_queue.m_cv.wait_until(std::chrono::system_clock::now() + std::chrono::milliseconds((*ite)->ttl()));
+
+        }
             
-        } while(0);
     }
 
 
