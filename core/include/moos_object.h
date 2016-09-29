@@ -6,6 +6,7 @@
 #include "moos_defines.h"
 #include "moos_looper.h"
 #include "moos_guard.h"
+#include "moos_thread.h"
 
 #include <algorithm>
 
@@ -39,6 +40,11 @@ public:
     MoosLooper* eventLooper()
     {
         return m_looper;
+    }
+    
+    void moveToThread(MoosThread* th_)
+    {
+        m_looper = MoosLooper::getLooper(th_->getId());
     }
     
     MoosGuard guard()
