@@ -5,6 +5,7 @@
 
 #include "moos_defines.h"
 #include "moos_looper.h"
+#include "moos_guard.h"
 
 #include <algorithm>
 
@@ -39,6 +40,11 @@ public:
     {
         return m_looper;
     }
+    
+    MoosGuard guard()
+    {
+        return m_guard;
+    }
 
 
 protected:
@@ -69,6 +75,7 @@ protected:
     MoosLooper* m_looper;
     MoosObject* m_parent;
     std::list<MoosObject*> m_children;
+    MoosGuard m_guard;
 };
 
 
