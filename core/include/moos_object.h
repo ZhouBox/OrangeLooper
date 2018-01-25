@@ -52,6 +52,11 @@ public:
         return m_guard;
     }
 
+    int exec()
+    {
+        return m_looper->exec();
+    }
+
 
 protected:
 
