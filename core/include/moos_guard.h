@@ -21,11 +21,11 @@ class MoosGuard
   ~MoosGuard()
   {
     if (m_isHost) {
-      m_guard->m_vaild = false;
+      *m_guard->m_vaild = false;
     }
     
     if (((*m_guard->m_ref)--) == 0) {
-      delete m_guard
+      delete m_guard;
     }
   }
   
@@ -76,11 +76,11 @@ template<typename T>
 class MoosGuardPtr
 {
   public:
-    MoosGuardPrt(T* ptr_)
-      :m_ptr(ptr_)
-        ,m_guard(ptr_->guard())
-    {
-    }
+  MoosGuardPtr(T* ptr_)
+    :m_ptr(ptr_)
+    ,m_guard(ptr_->guard())
+  {
+  }
   
   T* operator->()
   {
@@ -99,8 +99,8 @@ class MoosGuardPtr
   
   private:
   T* m_ptr;
-  MoosGuard m_gurad;
-}
+  MoosGuard m_guard;
+};
 
 
 

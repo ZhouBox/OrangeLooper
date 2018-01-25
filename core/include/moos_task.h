@@ -1,10 +1,12 @@
 #ifndef MOOS_TASK_H
 #define MOOS_TASK_H
 
-#include <memory>
+
 
 #include "moos_defines.h"
 #include "moos_task_policy.h"
+
+#include <memory>
 
 
 DEFINE_NAMESPACE_MOOS_BEGIN

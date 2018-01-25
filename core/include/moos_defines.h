@@ -3,7 +3,7 @@
 
 #include <chrono>
 
-#define DEFINE_NAMESPACE_MOOS_BEGIN namespace Moos {
+#define DEFINE_NAMESPACE_MOOS_BEGIN namespace nccloud {
 
 #define DEFINE_NAMESPACE_MOOS_END }
 

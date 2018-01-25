@@ -6,6 +6,7 @@
 
 
 #include <iostream>
+#include <thread>
 
 
 
@@ -115,6 +116,6 @@ void debugLog(Args&& ... args)
 DEFINE_NAMESPACE_MOOS_END
 
 
-#define MOOS_DEBUG_LOG(...) Moos::debugLog("filename:", __FILE__, " line:", __LINE__, " ", __VA_ARGS__)
+#define MOOS_DEBUG_LOG(...) nccloud::debugLog("filename:", __FILE__, " line:", __LINE__, " tid:", std::this_thread::get_id(), __VA_ARGS__)
 
 #endif // MOOS_LOGGER_H

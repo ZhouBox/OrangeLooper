@@ -2,13 +2,15 @@
 #define MOOS_LOOPER_H
 
 
+
+
+#include "moos_defines.h"
+#include "moos_task_queue.h"
+
 #include <map>
 #include <thread>
 #include <atomic>
-
-#include "moos_defines.h"
-
-#include "moos_task_queue.h"
+#include <algorithm>
 
 
 DEFINE_NAMESPACE_MOOS_BEGIN
@@ -128,7 +130,7 @@ private:
         auto ite = std::min_element(m_queue.m_queue.begin(), m_queue.m_queue.end(),
                                         [](const MoosTaskBase*t1, const MoosTaskBase* t2){ return t1->ttl() < t2->ttl();});
         if (ite != m_queue.m_queue.end() && (*ite)->ttl()) {
-            m_queue.m_cv.wait_until(std::chrono::system_clock::now() + std::chrono::milliseconds((*ite)->ttl()));
+            m_queue.m_cv.wait_until(_lock, std::chrono::system_clock::now() + std::chrono::milliseconds((*ite)->ttl()));
 
         }
             
@@ -150,6 +152,6 @@ private:
 DEFINE_NAMESPACE_MOOS_END
 
 
-#define MOOS_EXEC() Moos::MoosLooper::currentLooper()->exec()
+#define MOOS_EXEC() nccloud::MoosLooper::currentLooper()->exec()
 
 #endif // MOOS_LOOPER_H

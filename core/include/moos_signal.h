@@ -1,14 +1,16 @@
 #ifndef MOOS_SIGNAL_H
 #define MOOS_SIGNAL_H
 
+
+
+#include "moos_defines.h"
+#include "moos_looper.h"
+
 #include <memory>
 #include <list>
 #include <type_traits>
 #include <cassert>
 #include <algorithm>
-
-#include "moos_defines.h"
-#include "moos_looper.h"
 
 DEFINE_NAMESPACE_MOOS_BEGIN
 
@@ -236,7 +238,7 @@ private:
 DEFINE_NAMESPACE_MOOS_END
 
 
-#define MOOS_SIGNAL(...) Moos::MoosSignal<__VA_ARGS__>
+#define MOOS_SIGNAL(...) nccloud::MoosSignal<__VA_ARGS__>
 
 #define MOOS_CONNECT(Signal, ...) Signal.connect(__VA_ARGS__)
 

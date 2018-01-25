@@ -1,13 +1,15 @@
 #ifndef MOOS_THREAD_H
 #define MOOS_THREAD_H
 
-#include <thread>
-#include <memory>
-#include <atomic>
+
 
 
 #include "moos_defines.h"
 #include "moos_looper.h"
+
+#include <thread>
+#include <memory>
+#include <atomic>
 
 
 DEFINE_NAMESPACE_MOOS_BEGIN
@@ -58,7 +60,11 @@ public:
         return m_id;
     }
 
-    virtual bool threadRun() = 0;
+    virtual bool threadRun() 
+    {
+        MoosLooper::currentLooper()->exec();
+        return true; 
+    }
 
 private:
 

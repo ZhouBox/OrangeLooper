@@ -1,13 +1,15 @@
 #ifndef MOOS_TASK_QUEUE_H
 #define MOOS_TASK_QUEUE_H
 
-#include <list>
-#include <condition_variable>
-#include <mutex>
+
 
 
 #include "moos_defines.h"
 #include "moos_task.h"
+
+#include <list>
+#include <condition_variable>
+#include <mutex>
 
 
 
