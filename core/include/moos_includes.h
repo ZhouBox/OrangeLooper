@@ -7,6 +7,7 @@
 #include "moos_object.h"
 #include "moos_signal.h"
 #include "moos_thread.h"
+#include "moos_timer.h"
 
 
 

@@ -24,7 +24,7 @@ class MoosGuard
       *m_guard->m_vaild = false;
     }
     
-    if (((*m_guard->m_ref)--) == 0) {
+    if ((--(*m_guard->m_ref)) == 0) {
       delete m_guard;
     }
   }
@@ -33,14 +33,14 @@ class MoosGuard
   {
     m_guard = other.m_guard;
     m_isHost = false;
-    m_guard->m_ref++;
+    ++(*m_guard->m_ref);
   }
   
   MoosGuard& operator=(const MoosGuard& other)
   {
     m_guard = other.m_guard;
     m_isHost = false;
-    m_guard->m_ref++;
+    ++(*m_guard->m_ref);
     return *this;
   }
   

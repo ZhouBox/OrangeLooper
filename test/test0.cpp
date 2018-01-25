@@ -25,6 +25,11 @@ public:
 		MOOS_DEBUG_LOG(a, '+', b, '=', a + b);
 	}
 
+	void timeOut()
+	{
+		MOOS_DEBUG_LOG("time out");
+	}
+
 };
 
 class Test1 : public nccloud::MoosObject
@@ -34,6 +39,11 @@ public:
 	{
 		MOOS_DEBUG_LOG(a, '-', b, '=', a -b);
 	}
+
+	void timeOut()
+	{
+		MOOS_DEBUG_LOG("time out");
+	}
 };
 
 
@@ -42,13 +52,16 @@ int main()
 	ThreadTest tt;
 	Test t;
 	nccloud::MoosThread tt1;
+	nccloud::MoosTimer timer;
 	Test1 t1;
 	tt1.start();
 	t.moveToThread(&tt1);
 
 	MOOS_CONNECT(tt.m_addSignal, &t, &Test::add);
 	MOOS_CONNECT(tt.m_addSignal, &t1, &Test1::reduce);
+	MOOS_CONNECT(timer.timeout, &t1, &Test1::timeOut);
+	MOOS_CONNECT(timer.timeout, &t, &Test::timeOut);
 	tt.start();
-
+	timer.start(5000);
 	return MOOS_EXEC();
 }
